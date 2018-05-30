@@ -32,7 +32,9 @@ void setup() {
 
 void draw() {
   background(255);
-  Cell[][] sol = boardList.get(1463);
+  for(int big=0; big<boardList.size(); big++){
+  Cell[][] sol = boardList.get(big);
+  /*
   for (int row=0; row<sol.length; row++) {
     for (int col=0; col<sol[row].length; col++) {
       if (sol[row][col].getperm()==0) {
@@ -41,9 +43,9 @@ void draw() {
         }
       }
     }
-  }
-
-  for (int row=0; row<sol.length; row++) {
+  }*/
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /*for (int row=0; row<sol.length; row++) {
     for (int col=0; col<sol[row].length; col++) {
       int count=0;
       for ( boolean i : sol[row][col].getposs()) {
@@ -54,65 +56,81 @@ void draw() {
       if (count==1) {
         for (int i=0; i<9; i++) {
           if (sol[row][col].getposs()[i]) {
-            sol[row][col].setperm(i+1);
+            sol[row][col].settemp(i+1);
           }
         }
       }
     }
-  }
-  boardList.set(1463, sol);
-  for (Cell[] i : boardList.get(1463)) {
+  }*/
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //boardList.set(1463, sol);
+  System.out.println("Start");
+  for (Cell[] i : boardList.get(big)) {
     for (Cell j : i) {
+      if(j.getperm()!=0){
       System.out.print(j.getperm());
+      }else{
+        print(j.gettemp());
+      }
     }
     System.out.println();
   }
   System.out.println();
-  for (int num=9; num>=1; num--) {
-    boolean breaker=true;
-    if (breaker) {
-      for (int row=0; row<sol.length; row++) {
-        for (int col=0; col<sol[row].length; col++) {
-          int x=solve.setCheck(row, col, sol, num);
-          if (x>-1) {
-            for (int i=(row/3)*3; i<(row/3)*3+3; i++) {
-              for (int j=(col/3)*3; j<(col/3)*3+3; j++) {
-                sol[i][j].setposs(x+1, false);
-              }
-            }
-          }
-        }
-      }
-      for (int row=0; row<sol.length; row++) {
-        for (int col=0; col<sol[row].length; col++) {
-          int count=0;
-          for ( boolean i : sol[row][col].getposs()) {
-            if (i) {
-              count++;
-            }
-          }
-          if (count==1 && solve.checkSurr(row,col,sol)) {
-            for (int i=0; i<9; i++) {
-              if (sol[row][col].getposs()[i] && solve.checkBox(row,col,sol,i+1) && solve.checkLines(row,col,sol,i+1)) {
-                sol[row][col].setperm(i+1);
-                System.out.println("kachow "+num);
-                 breaker=false;
-              }
-            }
-          }
-        }
-      }
-    }else{
-      System.out.println("break");
-    break;
-    }
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  if(solve.backtracker(sol)){
+    
+  }else{
+    System.out.println("nop");
   }
-  boardList.set(1463, sol); 
-  for (Cell[] i : boardList.get(1463)) {
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /*for (int num=9; num>=1; num--) {
+   boolean breaker=true;
+   if (breaker) {
+   for (int row=0; row<sol.length; row++) {
+   for (int col=0; col<sol[row].length; col++) {
+   int x=solve.setCheck(row, col, sol, num);
+   if (x>-1) {
+   for (int i=(row/3)*3; i<(row/3)*3+3; i++) {
+   for (int j=(col/3)*3; j<(col/3)*3+3; j++) {
+   sol[i][j].setposs(x+1, false);
+   }
+   }
+   }
+   }
+   }
+   for (int row=0; row<sol.length; row++) {
+   for (int col=0; col<sol[row].length; col++) {
+   int count=0;
+   for ( boolean i : sol[row][col].getposs()) {
+   if (i) {
+   count++;
+   }
+   }
+   if (count==1 && solve.checkSurr(row,col,sol)) {
+   for (int i=0; i<9; i++) {
+   if (sol[row][col].getposs()[i] && solve.checkBox(row,col,sol,i+1) && solve.checkLines(row,col,sol,i+1)) {
+   sol[row][col].setperm(i+1);
+   System.out.println("kachow "+num);
+   breaker=false;
+   }
+   }
+   }
+   }
+   }
+   }
+   }*/
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+  boardList.set(big, sol); 
+  for (Cell[] i : boardList.get(big)) {
     for (Cell j : i) {
+      if(j.getperm()!=0){
       System.out.print(j.getperm());
+      }else{
+        print(j.gettemp());
+      }
     }
     System.out.println();
   }
   System.out.println();
+}
 }
