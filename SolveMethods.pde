@@ -97,6 +97,17 @@ public class SolveMethods {
     for (int i=1; i<=9; i++) {
       if (checkBox(row, col, x, i)&&checkLines(row, col, x, i)) {
         x[row][col].settemp(i);
+        /*for (Cell[] y : x) {
+          for (Cell j : y) {
+            if (j.getperm()!=0) {
+              System.out.print(j.getperm());
+            } else {
+              print(j.gettemp());
+            }
+          }
+          System.out.println();
+        }
+        System.out.println();*/
         if (backtracker(x)) {
           return true;
         }
@@ -105,11 +116,46 @@ public class SolveMethods {
     }
     return false;
   }
-  public void display(Cell[][] x){
+  public void display(Cell[][] x) {
+    background(255);
+    for (int i=1; i<9; i++) {
+      if (i%3==0) {
+        strokeWeight(5);
+      } else {
+        strokeWeight(2);
+      }
+      line(i*70, 0, i*70, 630);
+      line(0, i*70, 630, i*70);
+    }
+
     for (int row=0; row<x.length; row++) {
       for (int col=0; col<x[row].length; col++) {
-        
+        fill(0);
+        textSize(32);
+        if (x[row][col].getperm()==0) {
+          text(x[row][col].gettemp(), 70*row+28, 70*col+50);
+        } else {
+          text(x[row][col].getperm(), 70*row+28, 70*col+50);
+        }
       }
     }
+    line(0,630,900,630);
+    textSize(42);
+    text("Solve All (too processing heavy \nfor display, in console)",50,750);
+    line(630,0,630,630);
+    line(630,315,900,315);
+    textSize(42);
+    text("Show\nRandom\nSudoku",680,110);
+    text("Solve \nthat\nSudoku",680,410);
+  }
+  public void startscreen(){
+    strokeWeight(5);
+    fill(255);
+    
+    
+    fill(0);
+    
+    
+    
   }
 }
