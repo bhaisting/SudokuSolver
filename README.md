@@ -39,6 +39,6 @@ This is the code for the backtracking method I use, which will return if there i
 
 ## Acknowledgments
 
-* Shoutout to James Crook, I failed to implement his algorithm, but it helped me to better understand sudoku.
+* James Crook, I failed to implement his algorithm, but it helped me to better understand sudoku.
 * Geeksforgeeks.org, provided help when I was researching how to do recursive backtracking.
 * Dr. Thomas Reinartz, for encouraging throughout 2016, 2017, and 2018.
